@@ -9,13 +9,12 @@
         </div>
       </div>
       <div class="message-content">
-        {{ message.content.trim().replace(/^\s+$/m,"").replace("\n\n", "\n") }}
+        {{ message.content }}
+      </div>
+      <div class="message-thread-replies">
+        <message v-for="reply in message.replies" v-bind:key="reply.id"/>
       </div>
     </div>
-  </div>
-
-  <div class="message-thread-replies">
-    <Message v-for="reply in message.replies" v-bind:key="reply.id" :message="reply"/>
   </div>
 </template>
 
@@ -61,27 +60,9 @@ div.message {
     border-radius: 10px;
 
     div.message-metadata {
-      display: flex;
       font-size: 0.8em;
-      margin-bottom: 5px;
-
-      div.message-timestamp {
-        margin-left: 10px;
-      }
-
-      div.author-name {
-        display: inline-block;
-        font-weight: bold;
-      }
-    }
-
-    div.message-content {
-      white-space: pre-line;
+      margin-bottom: 0.5em;
     }
   }
-}
-
-div.message-thread-replies {
-  margin-left: 100px;
 }
 </style>
