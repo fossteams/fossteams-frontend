@@ -1,5 +1,5 @@
 <template>
-  <div class="message" v-if="message != null">
+  <div class="message" v-if="message != null && validMessage">
     <img src="https://randomuser.me/api/portraits/men/1.jpg" class="profile-picture" />
     <div class="chat-bubble">
       <div class="message-metadata">
@@ -36,6 +36,14 @@ export default class MessageComponent extends Vue {
       }
       dayjs.extend(relativeTime);
       return dayjs(this.message.originalArrivalTime).fromNow();
+    }
+
+    get validMessage(): boolean {
+      if (this.message == null) {
+        return false;
+      }
+      return ['RichText/Html', 'Text']
+        .indexOf(this.message.type) !== -1;
     }
 }
 </script>
